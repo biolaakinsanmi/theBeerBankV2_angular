@@ -1,0 +1,20 @@
+/** Style Custom Variables **/
+$theme-colors: (
+  "primary": #fab20b,
+  "secondary": #eeeeee
+);
+/** End Style Custom Variables **/
+
+@import 'node_modules/bootstrap/scss/bootstrap-reboot';
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+/* You can add global styles to this file, and also import other style files */
+.sticky{
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky_padded{
+  padding-top: 40px;
+}

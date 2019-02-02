@@ -23,10 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap-reboot.css",
-              "node_modules/bootstrap/dist/css/bootstrap-grid.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "src/assets/css/styles.css"
+              "src/assets/css/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
