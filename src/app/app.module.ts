@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { SingleBeerChildViewComponent } from './single-beer-child-view/single-be
     HttpClientModule,
     AppRoutingModule,
     InfiniteScrollModule,
+    ReactiveFormsModule
   ],
   providers: [
     BeerService
