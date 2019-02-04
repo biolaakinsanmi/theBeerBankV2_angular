@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs'
+import { Beer } from './../_models/beer-model';
+import { BeerService } from './../_services/beer.service';
+
 
 @Component({
   selector: 'app-home-page',
@@ -7,9 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor (
+    private beerService: BeerService
+  ){
 
-  ngOnInit() {
+  }
+
+  private beers$ : Subscription;
+  public beers: Array<Beer> = [];
+  private page: number = 1;
+  private size: number = 25;
+
+  ngOnInit(){
+    this.beers$ = this.beerService._beers.subscribe(
+      (beersList) => {
+        this.beers = beersList;
+        console.log(beersList);
+      }
+    )
+
+    this.fetchBeersList();
+  }
+
+  fetchBeersList(){
+    this.beerService.fetchBeers()
   }
 
 }
