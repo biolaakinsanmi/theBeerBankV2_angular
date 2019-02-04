@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Beer } from './../_models/beer-model';
+import { BeerService } from './../_services/beer.service';
 
 @Component({
   selector: 'app-single-beer-child-view',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SingleBeerChildViewComponent implements OnInit {
 
+  @Input() singleBeer:Beer;
+
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

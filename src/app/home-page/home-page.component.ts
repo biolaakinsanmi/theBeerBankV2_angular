@@ -24,6 +24,9 @@ export class HomePageComponent implements OnInit {
   private page: number = 1;
   private size: number = 25;
 
+  public viewdBeer: Beer;
+  
+
   ngOnInit(){
     this.beers$ = this.beerService._beers.subscribe(
       (beersList) => {
@@ -39,11 +42,16 @@ export class HomePageComponent implements OnInit {
     this.beerService.fetchBeers(this.page, this.size)
   }
 
-  showModal(){
+  showModal(beer){
+    this.viewdBeer = beer;
     $('#viewBeerModal').modal({
       show: true,
       focus: true
     })
+  }
+
+  ngOnDestroy() {
+    if(this.beers$) this.beers$.unsubscribe();
   }
 
 }

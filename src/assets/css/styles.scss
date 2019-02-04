@@ -30,6 +30,42 @@ h1, h2, h3, h4, h5, h6{
     }
     .modal-body{
       padding: 1.5rem;
+      .singlebeer{
+        text-align: center;
+        img{
+          width: auto;
+          margin: auto auto 1.5rem auto;
+          max-height: 65vh;
+        }
+      }
+      .tagline{
+        font-size: 1.2rem;
+        padding-bottom: 1.5rem;
+        position: relative;
+        margin-bottom: 0.3rem;
+        &:after{
+          content: " ";
+          width: 90px;
+          border-bottom: solid 5px #b33e99;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+      }
+      .boldtext{
+        font-weight: 600;
+      }
+      .ingredients{
+        margin: 1rem auto;
+        span{
+          &:not(:first-child){
+            padding-left: 20px;
+          }
+        }
+      }
+      .best_served_info{
+        margin: 1rem auto 2rem auto;
+      }
     }
   }
 }

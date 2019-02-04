@@ -1,3 +1,42 @@
-<p>
-  single-beer-child-view works!
-</p>
+<div *ngIf="singleBeer">
+  <div class="row">
+    <div class="col-md-3 singlebeer">
+      <img src="{{singleBeer?.image_url}}" alt="{{singleBeer?.name}}">
+    </div>
+    <div class="col-md-9">
+      <h4>{{singleBeer?.name}}</h4>
+      <div class="tagline">{{ singleBeer?.tagline }}</div>
+
+      <div class="ingredients">
+          <span class="boldtext">IBU:</span> {{singleBeer?.ibu}}
+          <span class="boldtext">ABV:</span> {{singleBeer?.abv}}
+          <span class="boldtext">EBC:</span> {{singleBeer?.ebc}}
+      </div>
+
+      <div class="description">
+        {{singleBeer?.description}}
+      </div>
+
+      <div class="best_served_info">
+        <div class="boldtext">Best Served with:</div>
+        <ul>
+          <li *ngFor="let item of singleBeer.food_pairing">{{item}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h5>You might also like:</h5>
+
+  <div class="row">
+    <div class="col-md-4">
+      1
+    </div>
+    <div class="col-md-4">
+      1
+    </div>
+    <div class="col-md-4">
+      1
+    </div>
+  </div>
+</div>

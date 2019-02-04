@@ -17,10 +17,10 @@
     <div class="row">
       <div class="beer_card col-lg-4 col-md-6 col-sm-12" *ngFor="let beer of beers">
         <div class="card text-center">
-          <div class="beer_thumb">
-            <img src="{{beer.image_url}}" alt="{{beer.name}}" (click)="showModal()">
+          <div class="beer_thumb" (click)="showModal(beer)">
+            <img src="{{beer.image_url}}" alt="{{beer.name}}">
           </div>
-          <div class="card-body">
+          <div class="card-body" (click)="showModal(beer)">
             <h5 class="card-title">
               {{ beer.name.length > 25? (beer.name | slice:0:25)+'..' : beer.name }}
             </h5>
@@ -44,47 +44,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <div class="col-md-2">
-            left
-          </div>
-          <div class="col-md-10">
-            <h3>Trashy Blonde</h3>
-            <div class="tagline">Yu know you shouldn't</div>
-
-            <div class="ingredients">
-                <span class="boldtext">ABV:</span> 41%
-                <span class="boldtext">ABV:</span> 41%
-                <span class="boldtext">ABV:</span> 41%
-            </div>
-
-            <div class="description">
-              asdasdasdads
-            </div>
-
-            <div class="best_served_info">
-              <div class="boldtext">Best Served with:</div>
-              <ul class="li">A</ul>
-              <ul class="li">B</ul>
-              <ul class="li">C</ul>
-              <ul class="li">D</ul>
-            </div>
-          </div>
-        </div>
-        <h5>
-          You might also like:
-        </h5>
-        <div class="row">
-          <div class="col-md-4">
-            1
-          </div>
-          <div class="col-md-4">
-            1
-          </div>
-          <div class="col-md-4">
-            1
-          </div>
-        </div>
+        <app-single-beer-child-view [singleBeer]="viewdBeer"></app-single-beer-child-view>
       </div>
     </div>
   </div>
