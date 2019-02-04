@@ -9,13 +9,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FavouritePageComponent } from './favourite-page/favourite-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SingleBeerChildViewComponent } from './single-beer-child-view/single-beer-child-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     FavouritePageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SingleBeerChildViewComponent
   ],
   imports: [
     BrowserModule,
