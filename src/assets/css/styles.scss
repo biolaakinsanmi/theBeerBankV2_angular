@@ -9,6 +9,11 @@ $theme-colors: (
 @import 'node_modules/bootstrap/scss/bootstrap';
 
 /* You can add global styles to this file, and also import other style files */
+
+body{
+  background: #f8f8f8;
+}
+
 .sticky{
   position: fixed;
   top: 0;
@@ -17,4 +22,22 @@ $theme-colors: (
 
 .sticky_padded{
   padding-top: 40px;
+}
+
+.beer_card{
+  position: relative;
+  .beer_thumb{
+    padding-top: 25px;
+    padding-bottom: 15px;
+    img{
+      height: 90px;
+    }
+  }
+  .fav_star{
+    cursor: pointer;
+    position: absolute;
+    z-index: 10;
+    top: 10px;
+    right: 10px;
+  }
 }
