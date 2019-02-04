@@ -7,26 +7,28 @@
         Find your favourite beer here
     </h6>
     
-    <form action="">
-      <input type="text" placeholder="Search for beer name">
-    </form>
+    <input type="text" id="beerSearchQuery" [formControl]="searchQuery" placeholder="Search for beer name" />
   
   </section>
   
-  <section id="home_content" class="container content_body">
+  <section id="home_content" class="container content_body" infiniteScroll
+  [infiniteScrollDistance]="3"
+  [infiniteScrollThrottle]="150" 
+  [alwaysCallback] = "false" 
+  (scrolled)="onScroll()">
     <div class="row">
-      <div class="beer_card col-lg-4 col-md-6 col-sm-12" *ngFor="let beer of beers">
+      <div class="beer_card col-lg-4 col-md-6 col-sm-12" *ngFor="let beer of beers; let i = index;">
         <div class="card text-center">
           <div class="beer_thumb" (click)="showModal(beer)">
             <img src="{{beer.image_url}}" alt="{{beer.name}}">
           </div>
           <div class="card-body" (click)="showModal(beer)">
             <h5 class="card-title">
-              {{ beer.name.length > 25? (beer.name | slice:0:25)+'..' : beer.name }}
+              {{ beer.name }}
             </h5>
             <p class="card-text">{{ beer.tagline }}</p>
           </div>
-          <i class="fa fa-star-o fav_star"></i>
+          <i class="fa {{ beer.isFavourite? 'fa-star' : 'fa-star-o' }} fav_star" (click)="updateFavourite(beer, i)"></i>
         </div>
       </div>
     </div>

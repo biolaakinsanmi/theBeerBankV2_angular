@@ -1,7 +1,7 @@
 import { Beer } from '../_models/beer-interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, BehaviorSubject, observable } from 'rxjs';
+import { of } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 
@@ -10,36 +10,46 @@ import { environment } from '../../environments/environment';
 })
 export class BeerService {
 
-  
-  private beers : Array<Beer> = []; 
-  public _beers: BehaviorSubject<Array<Beer>> = new BehaviorSubject([]);
+   
+  private favouriteBeers : Array<number> = []; 
 
   constructor(
     private http: HttpClient
   ) { }
+  /****Favourites *****/
 
-  getBeers(){
-    return this._beers.asObservable();
+  getFavouriteBeers(){
+    return this.favouriteBeers;
   }
 
-  addBeer(newBeer: Beer){
-    this.beers.push(newBeer);
-    return this._beers.next(Object.assign({}, this.beers));
+  addFavouriteBeer(newBeerId: number){
+    this.favouriteBeers.push(newBeerId);
+    console.log(this.favouriteBeers);
+    return this.favouriteBeers;
+  }
+
+  removeFavouriteBeer(id: number){
+    let index = this.favouriteBeers.indexOf(id);
+    console.log("index remove", index);
+    this.favouriteBeers.splice(index, 1)
+    console.log(this.favouriteBeers);
+    return this.favouriteBeers;
   }
 
 
   /*********** HTTP CALLS ******/
-  fetchBeers(page = 1, size = 25){
-    this.http.get(environment.apiUrl + 'beers?page=' + page + '&per_page=' + size).subscribe(
-      (response: any)=>{
-        this.beers = response;
-        this._beers.next(this.beers);
-        return of(true);
-      },
-      (error)=>{
-        return of(false);
-      }
-    )
+  searchBeerByName(query){
+    if(!query){
+      return of([])
+    }
+    return this.http.get(environment.apiUrl + 'beers?beer_name=' + query )
   }
 
+  fetchBeers(page = 1, size = 25){
+    return this.http.get(environment.apiUrl + 'beers?page=' + page + '&per_page=' + size)
+  }
+
+  fetchBeersByIds(ids: string){
+    return this.http.get(environment.apiUrl + 'beers?ids=' + ids)
+  }
 }
