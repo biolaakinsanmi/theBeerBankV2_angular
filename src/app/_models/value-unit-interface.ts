@@ -1,4 +1,4 @@
-export class ValueUnit{
+export interface ValueUnit{
   value: number;
   unit: string;
 }

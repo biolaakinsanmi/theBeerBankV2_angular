@@ -1,9 +1,6 @@
-import { BeerMethodTempDuration } from './beer-method-temp-duration-model';
+import { BeerMethodTempDuration } from './beer-method-temp-duration-interface';
 
-export class BeerMethod{
-  constructor(){
-
-  }
+export interface BeerMethod{
 
   mash_temp: [
     {

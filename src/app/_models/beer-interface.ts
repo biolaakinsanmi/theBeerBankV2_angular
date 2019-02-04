@@ -1,14 +1,10 @@
-import { BeerMethod } from './beer-method-model';
-import { ValueUnit } from './value-unit-model';
-import { BeerNameAmount } from './beer_ingredients-name-amount-method';
+import { BeerMethod } from './beer-method-interface';
+import { ValueUnit } from './value-unit-interface';
+import { BeerNameAmount } from './beer_ingredients-name-amount-interface';
 
 
 
-export class Beer {
-  constructor(){
-
-  }
-
+export interface Beer {
   id: number;
   name: string;
   tagline: string;
@@ -40,4 +36,6 @@ export class Beer {
   food_pairing: Array<string>;
   brewers_tips: string;
   contributed_by: string;
+
+  isFavourite?: boolean;
 }

@@ -1,4 +1,4 @@
-import { Beer } from './../_models/beer-model';
+import { Beer } from '../_models/beer-interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, BehaviorSubject, observable } from 'rxjs';

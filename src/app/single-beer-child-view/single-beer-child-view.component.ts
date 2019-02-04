@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Beer } from './../_models/beer-model';
+import { Beer } from '../_models/beer-interface';
 import { BeerService } from './../_services/beer.service';
 
 @Component({

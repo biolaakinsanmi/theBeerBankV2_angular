@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs'
-import { Beer } from './../_models/beer-model';
+import { Beer } from '../_models/beer-interface';
 import { BeerService } from './../_services/beer.service';
 
 declare var $: any;
