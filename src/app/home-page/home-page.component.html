@@ -1,5 +1,5 @@
 
-<section class=".container-fluid  bg-primary text-center">
+<section class="container-fluid page_header text-center">
     <h1>
       The Beer Bank
     </h1>
@@ -13,19 +13,79 @@
   
   </section>
   
-  <section id="home_content" class="container">
+  <section id="home_content" class="container content_body">
     <div class="row">
-      <div class="beer_card col-sm-4" *ngFor="let beer of beers">
+      <div class="beer_card col-lg-4 col-md-6 col-sm-12" *ngFor="let beer of beers">
         <div class="card text-center">
           <div class="beer_thumb">
-            <img src="{{beer.image_url}}" alt="{{beer.name}}">
+            <img src="{{beer.image_url}}" alt="{{beer.name}}" (click)="showModal()">
           </div>
           <div class="card-body">
-            <h5 class="card-title">{{beer.name}}</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <h5 class="card-title">
+              {{ beer.name.length > 25? (beer.name | slice:0:25)+'..' : beer.name }}
+            </h5>
+            <p class="card-text">{{ beer.tagline }}</p>
           </div>
           <i class="fa fa-star-o fav_star"></i>
         </div>
       </div>
     </div>
   </section>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="viewBeerModal" tabindex="-1" role="dialog" aria-labelledby="viewBeerModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-2">
+            left
+          </div>
+          <div class="col-md-10">
+            <h3>Trashy Blonde</h3>
+            <div class="tagline">Yu know you shouldn't</div>
+
+            <div class="ingredients">
+                <span class="boldtext">ABV:</span> 41%
+                <span class="boldtext">ABV:</span> 41%
+                <span class="boldtext">ABV:</span> 41%
+            </div>
+
+            <div class="description">
+              asdasdasdads
+            </div>
+
+            <div class="best_served_info">
+              <div class="boldtext">Best Served with:</div>
+              <ul class="li">A</ul>
+              <ul class="li">B</ul>
+              <ul class="li">C</ul>
+              <ul class="li">D</ul>
+            </div>
+          </div>
+        </div>
+        <h5>
+          You might also like:
+        </h5>
+        <div class="row">
+          <div class="col-md-4">
+            1
+          </div>
+          <div class="col-md-4">
+            1
+          </div>
+          <div class="col-md-4">
+            1
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,8 @@ $theme-colors: (
   "primary": #fab20b,
   "secondary": #eeeeee
 );
+
+$primary: #fab20b;
 /** End Style Custom Variables **/
 
 @import 'node_modules/bootstrap/scss/bootstrap-reboot';
@@ -12,6 +14,57 @@ $theme-colors: (
 
 body{
   background: #f8f8f8;
+  color: #777777;
+}
+
+h1, h2, h3, h4, h5, h6{
+  color: $primary;
+}
+
+.modal{
+  .modal-dialog{
+    min-width: 60%;
+    .modal-header{
+      border-bottom: none;
+      padding: 0.5rem;
+    }
+    .modal-body{
+      padding: 1.5rem;
+    }
+  }
+}
+
+.page_header{
+  background-color: $primary;
+  padding-bottom: 2.5rem;
+  h1, h2, h3, h4, h5, h6{
+    color: $white;
+  }
+  h1{
+    font-size: 2rem;
+  }
+  input[type=text]{
+    width: 55%;
+    padding: 5px;
+    color: #666666;
+    border: none;
+    &:-moz-placeholder{
+      color: #a6a6a6;
+    }
+    &::placeholder{
+      color: #a6a6a6;
+    }
+    &::-webkit-input-placeholder{
+      color: #a6a6a6;
+    }
+    &:-ms-input-placeholder{
+      color: #a6a6a6;
+    }
+  }
+}
+
+.content_body{
+  padding: 3rem 1.5rem;
 }
 
 .sticky{
@@ -27,18 +80,42 @@ body{
 
 .beer_card{
   position: relative;
-  .beer_thumb{
-    padding-top: 25px;
-    padding-bottom: 15px;
-    img{
-      height: 90px;
+  padding: 10px;
+  .card{
+    .beer_thumb{
+      padding-top: 25px;
+      padding-bottom: 15px;
+      img{
+        height: 23vh;
+      }
+    }
+    .card-body{
+      padding: 1rem 1.25rem 2rem 1.25rem;
+      .card-text{
+        min-height: 75px;
+      }
+    }
+    .fav_star{
+      cursor: pointer;
+      position: absolute;
+      z-index: 10;
+      top: 10px;
+      right: 10px;
+      &:hover{
+        color: $primary;
+      }
     }
   }
-  .fav_star{
+
+  &:hover{
+    padding: 5px;
     cursor: pointer;
-    position: absolute;
-    z-index: 10;
-    top: 10px;
-    right: 10px;
+    .card{
+      padding: 5px;
+      -webkit-box-shadow: 0px 0px 10px #aaaaaa;
+      -moz-box-shadow: 0px 0px 10px #aaaaaa;
+      box-shadow: 0px 0px 10px #aaaaaa;
+    }
   }
 }
+

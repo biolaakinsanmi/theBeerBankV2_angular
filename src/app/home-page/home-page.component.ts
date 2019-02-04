@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs'
 import { Beer } from './../_models/beer-model';
 import { BeerService } from './../_services/beer.service';
 
+declare var $: any;
+
 
 @Component({
   selector: 'app-home-page',
@@ -34,7 +36,14 @@ export class HomePageComponent implements OnInit {
   }
 
   fetchBeersList(){
-    this.beerService.fetchBeers()
+    this.beerService.fetchBeers(this.page, this.size)
+  }
+
+  showModal(){
+    $('#viewBeerModal').modal({
+      show: true,
+      focus: true
+    })
   }
 
 }
