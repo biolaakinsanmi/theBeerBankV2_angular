@@ -160,3 +160,19 @@ h1, h2, h3, h4, h5, h6{
   }
 }
 
+
+.suggested_beers{
+  .beer{
+    text-align: center;
+    height: 100%;
+    padding: 10px;
+    border: solid 1px #a6a6a6;
+    img{
+      max-height: 120px;
+    }
+    h6{
+      color: gray;
+      margin-top: 15px;
+    }
+  }
+}

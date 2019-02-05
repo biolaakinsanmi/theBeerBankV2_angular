@@ -24,15 +24,12 @@ export class BeerService {
 
   addFavouriteBeer(newBeerId: number){
     this.favouriteBeers.push(newBeerId);
-    console.log(this.favouriteBeers);
     return this.favouriteBeers;
   }
 
   removeFavouriteBeer(id: number){
     let index = this.favouriteBeers.indexOf(id);
-    console.log("index remove", index);
     this.favouriteBeers.splice(index, 1)
-    console.log(this.favouriteBeers);
     return this.favouriteBeers;
   }
 
@@ -55,5 +52,25 @@ export class BeerService {
 
   fetchBeersByIds(ids: string){
     return this.http.get(environment.apiUrl + 'beers?ids=' + ids)
+  }
+
+  /****utils ***/
+  getRandomIndexes(maxIndex, count){
+    let arr = []
+    while(arr.length < count){
+        var i = Math.floor(Math.random() * maxIndex) + 1;
+        if(arr.indexOf(i) === -1) arr.push(i);
+    }
+
+    return arr;
+  }
+
+  getSuggestedBeers(beers:Array<Beer>, count: number){
+    let indexes = this.getRandomIndexes(beers.length, count);
+    
+    let suggesteds: Array<Beer> = [];
+    indexes.forEach(i => suggesteds.push(beers[i]));
+
+    return suggesteds;
   }
 }

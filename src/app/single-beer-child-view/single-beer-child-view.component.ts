@@ -11,10 +11,27 @@ export class SingleBeerChildViewComponent implements OnInit {
 
   @Input() singleBeer:Beer;
 
-  constructor() { }
+  constructor(
+    private beerService: BeerService
+  ) { }
+
+  private allBeers: Array<Beer>;
+  public suggestedBeers: Array<Beer> = [];
 
   ngOnInit() {
-    
+    this.beerService.fetchBeers().subscribe(
+      (response: any)=>{
+        this.allBeers = response;
+        this.getSuggestedBeers();
+      },
+      (error)=>{
+
+      }
+    )
+  }
+
+  getSuggestedBeers(){
+    this.suggestedBeers = this.beerService.getSuggestedBeers(this.allBeers, 3);
   }
 
 }
