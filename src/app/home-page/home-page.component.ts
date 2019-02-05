@@ -24,58 +24,67 @@ export class HomePageComponent implements OnInit {
   private size: number = 25;
 
   public viewdBeer: Beer;
+
+  public isLoadingBeers: Boolean = false;
   
   public searchQuery: FormControl = new FormControl();
 
   ngOnInit(){
-    this.searchQuery.valueChanges.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      switchMap((query) =>  this.beerService.searchBeerByName(query))
+    //subscribe to input field changes
+    this.searchQuery.valueChanges.pipe(  
+      debounceTime(200),    //delay by 200ms for changes
+      distinctUntilChanged(),  //ingnore similar emits
+      switchMap((query) =>  this.beerService.searchBeerByName(query))  //trigger search on every query
     )
     .subscribe( (result:Array<Beer>) => 
     {
       if(result.length < 1 && !this.searchQuery.value){
-        this.fetchBeersList();
+        this.fetchBeersList();  //reset beers list to alll beers, when inout bix is cleared
       }
       else{
-        this.parseFavouritesThenAdd(result);
+        this.parseFavouritesThenAdd(result); //parse received beers to map against favourites
       }
     });
 
-    this.fetchBeersList();
+    //init withfething all beers
+    this.fetchBeersList();  
   }
 
   fetchBeersList(page = this.page, size = this.size){
+    this.isLoadingBeers = true; //init spinner
     page = page >= 1 ? page : 1; //also helps when page is reloaded when scroll is at bottom.
     this.beerService.fetchBeers(page, size).subscribe(
       (response: any)=>{
-        this.parseFavouritesThenAdd(response);
+        this.parseFavouritesThenAdd(response); //parse received beers to map against favourites
+        this.isLoadingBeers = false; //hide spinner
       },
       (error)=>{
-
+        alert("Can't fetch Beers.") //can addd more error handling
+        this.isLoadingBeers = false;
       }
     )
   }
 
   parseFavouritesThenAdd(beersToParse: Array<Beer>){
-    const favourites = this.beerService.getFavouriteBeers();
+    const favourites = this.beerService.getFavouriteBeers(); //get favourites indexes in service
 
     beersToParse.map(
       beer => {
-        beer.isFavourite = favourites.includes(beer.id)? true : false;
+        beer.isFavourite = favourites.includes(beer.id)? true : false; //add is favourite flag to favourites 
         return beer;
       }
     )
 
     if(this.page == 1){
-      this.beers = beersToParse;
+      this.beers = beersToParse;  //if page number is1, cleer current beer list
     }
     else{
-      this.beers = this.beers.concat(beersToParse);
+      this.beers = this.beers.concat(beersToParse);  //else add to current list
     }
   }
 
+
+  ///handle add or remove favourite
   updateFavourite(beer: Beer, index){
     if(beer.isFavourite){
       this.beerService.removeFavouriteBeer(beer.id);
@@ -87,6 +96,7 @@ export class HomePageComponent implements OnInit {
     }
   }
 
+  //open modal to show selected beer
   showModal(beer: Beer){
     this.viewdBeer = beer;
     $('#viewBeerModal').modal({
@@ -95,8 +105,7 @@ export class HomePageComponent implements OnInit {
     })
   }
 
-  onScroll(){
-    console.log("Scrolled");
+  onScroll(){  //handle scroll trigger
     this.page++;
     this.fetchBeersList();
   }

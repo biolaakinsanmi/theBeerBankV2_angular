@@ -1,4 +1,4 @@
-
+<!--page header-->
 <section class="container-fluid page_header text-center">
     <h1>
       The Beer Bank
@@ -8,8 +8,13 @@
     </h6>
     
     <input type="text" id="beerSearchQuery" [formControl]="searchQuery" placeholder="Search for beer name" />
-  
+    <div class="text-center">
+      <a [routerLink]="['/advanced_search']" class="btn btn-outline-light btn-sm" style="margin-top: 10px;">
+        Advanced Search
+      </a>
+    </div>
   </section>
+  <!--end page header-->
   
   <section id="home_content" class="container content_body" infiniteScroll
   [infiniteScrollDistance]="3"
@@ -31,6 +36,13 @@
           <i class="fa {{ beer.isFavourite? 'fa-star' : 'fa-star-o' }} fav_star" (click)="updateFavourite(beer, i)"></i>
         </div>
       </div>
+    </div>
+
+    <div class="text-center"  *ngIf="isLoadingBeers">
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading favourites...
+      </button>
     </div>
   </section>
 
