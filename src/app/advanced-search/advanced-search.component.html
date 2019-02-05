@@ -1,0 +1,77 @@
+
+<section class="container-fluid page_header text-center">
+  <h1>
+    Advanced Searh
+  </h1>
+  <h6>
+    Use advanced fields to customise your search.
+  </h6>
+
+</section>
+
+<section id="advancefilter_content" class="container content_body">
+  <div>
+    <form data-abide novalidate #filterForm="ngForm" (ngSubmit)="filterBeersList()">
+    
+      <div class="card">
+        <div class="card-header">
+          Customize your search.
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group col-md-3 col-lg-2 col-sm-6" 
+            *ngFor="let filter of filterFields; let i = index;" style="position: relative">
+              <span class="float_label">{{filter.label}}</span>
+              <input  
+                class="form-control form-control-sm" 
+                name="{{filter.name}}" id="{{filter.name}}" 
+                 [(ngModel)]="filterFields[i].value" pattern="{{filter.pattern}}">
+                 <small class="text-danger" *ngIf="filterForm.form.controls[filter.name]?.invalid" style="font-size: 9px;">*{{filter.hint}}</small>
+            </div>
+          </div>
+          <div>
+            <div class="form-group ">
+              <button type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="filterForm.invalid" >Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+    </form>
+    <div class="row">
+      <div class="beer_card col-lg-4 col-md-6 col-sm-12" *ngFor="let beer of beerResults; let i = index;">
+        <div class="card text-center">
+          <div class="beer_thumb" (click)="showModal(beer)">
+            <img src="{{beer.image_url}}" alt="{{beer.name}}">
+          </div>
+          <div class="card-body" (click)="showModal(beer)">
+            <h5 class="card-title">
+              {{ beer.name.length > 25? (beer.name | slice:0:25)+'..' : beer.name }}
+            </h5>
+            <p class="card-text">{{ beer.tagline }}</p>
+          </div>
+          <i class="fa {{ beer.isFavourite? 'fa-star' : 'fa-star-o' }} fav_star" (click)="updateFavourite(beer, i)"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="viewBeerModal" tabindex="-1" role="dialog" aria-labelledby="viewBeerModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-single-beer-child-view [singleBeer]="viewedBeer"></app-single-beer-child-view>
+    </div>
+  </div>
+</div>
+</div>
