@@ -49,6 +49,10 @@ export class BeerService {
     return this.http.get(environment.apiUrl + 'beers?page=' + page + '&per_page=' + size)
   }
 
+  fetchBeersByQuery(query){
+    return this.http.get(environment.apiUrl + 'beers?' + query)
+  }
+
   fetchBeersByIds(ids: string){
     return this.http.get(environment.apiUrl + 'beers?ids=' + ids)
   }
